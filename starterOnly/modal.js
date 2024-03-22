@@ -1,3 +1,4 @@
+// Fonction pour modifier la navigation
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -7,112 +8,107 @@ function editNav() {
   }
 }
 
-// DOM Elements
+// Éléments DOM
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const modalCloseBtn = document.querySelectorAll(".close");
+const form = document.getElementsByName('reserve');
 
-// launch modal event
+// Événement de lancement du modal
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
+// Fonction pour lancer le modal
 function launchModal() {
   modalbg.style.display = "block";
 }
-// Close modal form
+
+// Fonction pour fermer le modal
 function closeModal() {
-  modalbg.style.display = 'none';
-};
-function validate() {
-  let isValid = true;
-
-  // Champ Prénom
-  
-  const firstName = document.getElementById("first");
-  const firstNameError = document.getElementById("first-error");
-  if (firstName.value.trim().length < 2) {
-    firstNameError.textContent = "Veuillez entrer 2 caractères ou plus pour le prénom.";
-    isValid = false;
-  } else {
-    firstNameError.textContent = "";
-  }
-
-  // Champ Nom
- 
-  const lastName = document.getElementById("last");
-  const lastNameError = document.getElementById("last-error");
-  if (lastName.value.trim().length < 2) {
-    lastNameError.textContent = "Veuillez entrer 2 caractères ou plus pour le nom.";
-    isValid = false;
-  } else {
-    lastNameError.textContent = "";
-  }
-
-  // Champ Email
-  
-  const email = document.getElementById("email");
-  const emailError = document.getElementById("email-error");
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email.value.trim())) {
-    emailError.textContent = "Veuillez entrer une adresse email valide.";
-    isValid = false;
-  } else {
-    emailError.textContent = "";
-  }
-  
-  //Champ date de naissance
-  
-  const birthdate = document.getElementById("birthdate");
-  const birthdateError = document.getElementById("birthdate-error");
-  const birthdateValue = birthdate.value.trim();
-if (birthdateValue === "") {
-  birthdateError.textContent = "Veuillez entrer votre date de naissance.";
-  isValid = false;
-} else {
-  birthdateError.textContent = "";
+  modalbg.style.display = "none";
 }
 
-  // Champ Nombre de tournois
-  
-  const quantity = document.getElementById("quantity");
-  const quantityError = document.getElementById("quantity-error");
-  if (isNaN(quantity.value.trim()) || quantity.value.trim() === "") {
-    quantityError.textContent = "Veuillez entrer un nombre valide.";
-    isValid = false;
-  } else {
-    quantityError.textContent = "";
-  }
+// Événement de fermeture du modal
+modalCloseBtn[0].addEventListener("click", closeModal);
 
-  // Bouton Radio
-  
-  const locationError = document.getElementById("location-error");
-  const radioButtons = document.getElementsByName("location");
-  let radioButtonChecked = false;
-  for (let i = 0; i < radioButtons.length; i++) {
-    if (radioButtons[i].checked) {
-      radioButtonChecked = true;
-      break;
+// Empêcher l'envoi du formulaire
+form[0].addEventListener('submit', (e) => {
+  e.preventDefault();
+});
+
+// Vérification de la condition fournie
+function checkCondition(condition){
+  if(!condition) return false;
+  else return true;
+}
+
+// Afficher un message d'erreur spécifique plutôt que l'identifiant d'élément fourni
+// Ajouter aria invalid pour utiliser CSS
+function getErrorMessage(elementId, message, inputAssociate){
+  if(elementId && message) {
+    document.getElementById(elementId).style.display = "block";
+    document.getElementById(elementId).innerText = message;
+    if(inputAssociate) inputAssociate.setAttribute("aria-invalid", "true");
+  }
+  else throw new Error('Paramètre manquant pour le message d\'erreur du gestionnaire');
+}
+
+// Masquer un champ valide précédemment invalide
+// Changer aria invalid en faux pour utiliser CSS
+function hideErrorMessage(elementId, inputAssociate) {
+  if(elementId) document.getElementById(elementId).style.display = "none";
+  if(inputAssociate) inputAssociate.setAttribute("aria-invalid", "false");
+}
+
+// Valider le formulaire après soumission
+function validate(form) { 
+  let firstNameValid = checkCondition(form["first"].value) && checkCondition(form["first"].value.length >= 2);
+  firstNameValid ? 
+    hideErrorMessage('error-firstName', form["first"]) : 
+    getErrorMessage('error-firstName', "Veuillez entrer 2 caractères ou plus pour le champ du prénom.", form["first"]);
+
+  let lastNameValid = checkCondition(form["last"].value) && checkCondition(form["last"].value.length >= 2);
+  lastNameValid ?  
+    hideErrorMessage('error-lastName', form["last"]) : 
+    getErrorMessage('error-lastName', "Veuillez entrer 2 caractères ou plus pour le champ du nom.", form["last"]); 
+
+  // Validation de l'email
+  let emailValid = checkCondition(form["email"].value) && checkCondition(/[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(form["email"].value));
+  emailValid ? 
+    hideErrorMessage('error-email', form["email"]) : 
+    getErrorMessage('error-email', "Veuillez entrer une adresse e-mail valide.", form["email"]);
+
+  // Validation de la date de naissance
+  let birthdateValid = checkCondition(form["birthdate"].value) && checkCondition(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(form["birthdate"].value));
+  birthdateValid ? 
+    hideErrorMessage('error-birthdate', form["birthdate"]) : 
+    getErrorMessage('error-birthdate', "Veuillez entrer une date de naissance valide au format jour-mois-année.", form["birthdate"]);
+
+  // Validation de la quantité de tournois
+  let qteTournamentValid = checkCondition(form["quantity"].value) && checkCondition(/^[0-9]+$/.test(form["quantity"].value));
+  qteTournamentValid ? 
+    hideErrorMessage('error-tournament', form["quantity"]) : 
+    getErrorMessage('error-tournament', "Veuillez entrer une valeur numérique pour la quantité de tournois.", form["quantity"]);
+
+  // Validation de la localisation
+  let locationValid = checkCondition(form.location.value);
+  locationValid ?  hideErrorMessage('error-location') : getErrorMessage('error-location', "Veuillez sélectionner une ville.");
+
+  // Validation des conditions générales
+  let termsValid = checkCondition(form.terms.checked);
+  termsValid ? hideErrorMessage('error-terms') : getErrorMessage('error-terms', "Veuillez indiquer que vous acceptez les conditions générales.");
+
+  // Vérifier si toutes les conditions sont valides pour afficher un message de confirmation
+  if(
+      firstNameValid 
+      && lastNameValid 
+      && emailValid
+      && birthdateValid 
+      && qteTournamentValid
+      && locationValid
+      && termsValid
+    ) {
+      document.querySelector(".modal-body").style.display = "none";
+      document.querySelector(".formConfirmation").style.display = "block";
     }
-  }
-  if (!radioButtonChecked) {
-    locationError.textContent = "Veuillez choisir une option.";
-    isValid = false;
-  } else {
-    locationError.textContent = "";
-  }
-
-  // Case à cocher
-  
-  const checkbox1 = document.getElementById("checkbox1");
-  const checkboxError = document.getElementById("checkbox-error");
-  if (!checkbox1.checked) {
-    checkboxError.textContent = "Veuillez accepter les termes et conditions.";
-    isValid = false;
-  } else {
-    checkboxError.textContent = "";
-  }
-
-  return isValid;
 }
-
-
