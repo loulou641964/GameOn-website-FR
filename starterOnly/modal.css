@@ -349,7 +349,6 @@ input[data-error]::after {
   transform: rotate(135deg);
   top: 13px;
 }
-
 .select-items div,
 .select-selected {
   color: #000;
