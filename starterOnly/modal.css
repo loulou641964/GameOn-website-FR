@@ -29,24 +29,14 @@ p {
 img {
   padding-right: 1rem;
 }
+
 .topnav {
-  overflow: hidden;
-  margin: 3.5%;
-  flex-wrap: nowrap;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  flex-flow: row wrap;
   align-items: center;
+  padding: 2.8rem;
 }
-
-.header-logo {
-  float: left;
-  cursor: pointer;
-}
-
-.main-navbar {
-  float: right;
-}
-
 .topnav a {
   float: left;
   display: block;
@@ -69,19 +59,64 @@ img {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
-  text-decoration: underline;
 }
 
 .topnav .icon {
   display: none;
 }
 
-.topnav a:hover {
+@media screen and (max-width: 768px) {
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+    color: #fe142f;
+    font-size: 8vw;
+    margin-top: -2rem;
+  }
+
+  .topnav a:hover {
     background: none;
     color: #fe142f;
   }
 
-  main {
+  .main-navbar {
+    margin-top: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .topnav.responsive {position: relative; display: block; padding-top: 4rem;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 2.3rem 3.1rem;
+    background: none;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+
+
+@media screen and (max-width: 540px) {
+  .header-logo img {
+    width: 200px;
+  }
+
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+
+main {
   font-size: 130%;
   font-weight: bolder;
   color: black;
@@ -140,7 +175,7 @@ img {
 .bground {
   display: none;
   position: fixed;
-  z-index: 99;
+  z-index: 1;
   left: 0;
   top: 0;
   height: 100%;
@@ -195,11 +230,10 @@ input {
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
-  text-align: left;
-  line-height: 1.1;
+  text-align: right;
+  line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
-  font-family: "Roboto", sans-serif;
 }
 .formData[data-error-visible="true"]::after {
   opacity: 1;
@@ -207,12 +241,12 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
- 
+/* 
 input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
-} 
+} */
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -309,12 +343,12 @@ input[data-error]::after {
   margin: 0 auto;
   border-radius: 7px;
   font-size: 1rem;
-  padding: 12px 65px;
+  padding: 12px 82px;
   color: #fff;
   cursor: pointer;
   border: 0;
 }
-/* Styles personnalisés pour les sélecteurs */
+/* custom select styles */
 .custom-select {
   position: relative;
   font-family: Arial;
@@ -329,7 +363,7 @@ input[data-error]::after {
   background-color: #fff;
 }
 
-/* Styliser la flèche à l'intérieur de l'élément select : */
+/* Style the arrow inside the select element: */
 .select-selected:after {
   position: absolute;
   content: "";
@@ -344,11 +378,12 @@ input[data-error]::after {
   border-radius: 5px 0 5px 0;
 }
 
-/* Orienter la flèche vers le haut lorsque la boîte de sélection est ouverte (active) : */
+/* Point the arrow upwards when the select box is open (active): */
 .select-selected.select-arrow-active:after {
   transform: rotate(135deg);
   top: 13px;
 }
+
 .select-items div,
 .select-selected {
   color: #000;
@@ -360,7 +395,7 @@ input[data-error]::after {
   height: 48px;
 }
 
-/* Style des éléments (options) : */
+/* Style items (options): */
 .select-items {
   position: absolute;
   background-color: #fff;
@@ -370,7 +405,7 @@ input[data-error]::after {
   z-index: 99;
 }
 
-/* Masquer les éléments lorsque la boîte de sélection est fermée : */
+/* Hide the items when the select box is closed: */
 .select-hide {
   display: none;
 }
@@ -382,10 +417,10 @@ input[data-error]::after {
 /* custom select end */
 .text-label {
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
 }
 .hero-section {
-  min-height: 60vh;
+  min-height: 93vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -400,7 +435,7 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 500px;
+  min-width: 424px;
 }
 .hero-content::after {
   content: "";
@@ -417,24 +452,22 @@ input[data-error]::after {
 }
 .hero-headline {
   font-size: 6rem;
-  font-size: clamp(4.5rem, 5vw, 6rem);
   font-weight: normal;
   white-space: nowrap;
 }
 .hero-text {
+  width: 146%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
-  font-size: 22px;
 }
 .btn-signup {
   outline: none;
   text-transform: capitalize;
   font-size: 1.3rem;
-  padding: 15px 35px;
+  padding: 15px 23px;
   margin: 0;
   margin-top: 59px;
-  font-size: 25px;
 }
 .hero-img {
   grid-column: span 8;
@@ -444,7 +477,6 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
-  position: relative;
 }
 .copyrights {
   color: #fe142f;
@@ -461,257 +493,44 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-
-/* MOBILE */
-@media screen and (max-width: 540px) {
-
-  .topnav a {
-    display: none;
-  }
-
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Ajout CSS */
-  body>.topnav {
-    margin: 1.5%;
-  }
-
-  body>main {
-    margin: 0;
-  }
-
-  .header-logo>img {
-    width: clamp(8rem, 15vw, 20rem) !important;
-  }
-
-  main>.hero-section {
-    font-weight: 500;
-    min-height: 70vh;
-  }
-
-  .hero-section>.hero-content {
-    padding: 0;
-    margin: 0;
-    text-align: left;
-    min-width: 100%;
-  }
-
-
-  .hero-content>.hero-text {
-    font-size: clamp(13px, 1.5vw, 2.2rem);
-    font-weight: 400;
-    margin-top: 25px;
-  }
-
-  .hero-content>.hero-headline {
-    font-size: clamp(1.5rem, 8.5vw, 12.1rem);
-    margin-top: 20px;
-    font-weight: 900;
-  }
-
-  .hero-section>.btn-signup,
-  .btn-submit,
-  .btnValid {
-    font-size: 14px;
-    padding: 7px 45px !important
-  }
-
-  body .copyrights {
-    font-size: 10px;
-    margin-top: 15px;
-  }
-
-  body {
-    padding: 30px;
-    /* Ajout d'un padding au body */
-  }
-
-  main>.bground {
-    background-color: transparent;
-    position: fixed;
-    padding-top: 60px;
-  }
-
-  .bground>.content {
-    max-width: 100%;
-    margin: 0 auto;
-    margin-top: 20px;
-    overflow: auto;
-  }
-
-  .bground .formData>label,
-  .text-label {
-    font-size: 11px !important;
-  }
-
-  .bground .formData {
-    margin-bottom: 5px;
-  }
-}
-
-@media screen and(min-width: 541px) and (max-width: 768px) {
-  .topnav a {
-    display: none;
-  }
-
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-
-  .topnav.responsive .icon {
-    font-size: 25px;
-  }
-
-}
-
-/* TABLETTE */
-@media screen and (max-width: 768px) {
-  .topnav.responsive {
-    position: relative;
-  }
-
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0;
-    background-color: transparent;
-  }
-
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
 @media screen and (max-width: 800px) {
-  /* Modification du CSS */
-
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0;
-    font-size: 25px;
-    background-color: transparent;
-  }
-
-  .topnav.responsive a {
-    position: relative;
-    top: 25px;
-
-  }
-
-  .topnav a {
-    display: none;
-    /* On cache les liens de navigation */
-  }
-
-  .topnav a.icon {
-    float: right;
-    display: block;
-    padding: 0;
-    /* On affiche le toggle pour la navigation */
-  }
-
-  .topnav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    background-color: white;
-    margin: 5.5%;
-  }
-
-  .header-logo img {
-    width: clamp(10rem, 15vw, 20rem);
-    position: absolute;
-    top: 0;
-  }
-
-  .main-navbar {
-    float: right;
-    padding: 0;
-    z-index: 10;
-  }
-
-  .fa {
-    color: #FF001B;
-  }
-
   .hero-section {
     display: block;
     box-shadow: unset;
   }
-
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 0;
+    padding: 20px;
   }
-
   .hero-content::after {
     content: unset;
   }
-
   .hero-content .btn-signup {
     display: none;
   }
-
   .hero-headline {
-    font-size: clamp(3.5rem, 8.5vw, 12.1rem);
-    margin-top: 20px;
-    font-weight: 900;
+    font-size: 4.5rem;
     white-space: normal;
   }
-
   .hero-text {
     width: unset;
     font-size: 1.5rem;
   }
-
   .hero-img img {
     border-radius: 10px;
     margin-top: 40px;
   }
-
-  .hero-section>.btn-signup {
+  .hero-section > .btn-signup {
     display: block;
     margin: 32px auto 10px;
     padding: 12px 35px;
   }
-
   .copyrights {
     margin-top: 50px;
     text-align: center;
   }
 }
-
-/* DESKTOP */
-@media screen and (min-width: 801px) {
-  .topnav {
-    margin-right: unset;
-    justify-content: space-between;
-  }
-
-  .main-navbar>ul {
-    display: flex;
-  }
-
-  body>footer {
-    margin-left: unset;
-    padding-left: unset;
-  }
-}
-
-
 
 @keyframes modalopen {
   from {
@@ -723,9 +542,8 @@ footer {
   }
 }
 
-
 .errorField {
-  color: rgb(225, 93, 93);
+  color: red;
   font-size: 0.8rem;
   margin-top: 0px;
   margin-bottom: 10px;

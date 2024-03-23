@@ -112,3 +112,4 @@ function validate(form) {
       document.querySelector(".formConfirmation").style.display = "block";
     }
 }
+
