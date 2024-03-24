@@ -543,7 +543,7 @@ footer {
 }
 
 .errorField {
-  color: red;
+  color: rgb(246, 101, 101);
   font-size: 0.8rem;
   margin-top: 0px;
   margin-bottom: 10px;
@@ -556,7 +556,7 @@ footer {
 }
 
 input[aria-invalid='true'] {
-  border: 2px solid #fe142f;
+  border: 2px solid #f80925;
 }
 
 input[aria-invalid='false'] {
