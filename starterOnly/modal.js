@@ -21,12 +21,26 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // Fonction pour lancer le modal
 function launchModal() {
   modalbg.style.display = "block";
+  
 }
 
 // Fonction pour fermer le modal
 function closeModal() {
   modalbg.style.display = "none";
+  // Réinitialiser le formulaire lors de la fermeture du modal
+  resetForm(form[0]);
 }
+
+// Réinitialiser le formulaire lors de la fermeture du modal
+function resetForm(form) {
+  form.reset(); // Réinitialiser le formulaire aux valeurs par défaut
+  // Réinitialiser les messages d'erreur
+  document.querySelectorAll('.error').forEach(errorElement => errorElement.remove());
+  // Afficher à nouveau le formulaire principal et cacher le message de confirmation
+  document.querySelector(".modal-body").style.display = "block";
+  document.querySelector(".formConfirmation").style.display = "none";
+}
+
 
 // Événement de fermeture du modal
 modalCloseBtn[0].addEventListener("click", closeModal);
@@ -110,5 +124,7 @@ function validate(form) {
     ) {
       document.querySelector(".modal-body").style.display = "none";
       document.querySelector(".formConfirmation").style.display = "block";
+      
     }
 }
+
