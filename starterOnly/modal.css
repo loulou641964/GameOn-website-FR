@@ -279,7 +279,7 @@ input[data-error]::after {
 }
 /* Ajout de btnValid pour le bouton fermer */
 
-.btn-submit, .btn-signup, .btnValid {
+.btn-submit, .btn-signup {
 	background: #fe142f;
 	display: block;
 	margin: 0 auto;
@@ -661,7 +661,7 @@ footer {
 	width: 100%;
 	text-align: center;
 	align-items: center;
-	font-size: 40px;
+	font-size: 24px;
 	font-weight: normal;
 	height: 700px;
 	padding-top: 200px;
@@ -672,10 +672,10 @@ footer {
 	background: #fe142f;
 	display: block;
 	margin: 0 auto;
-	margin-top: 330px;
-	border-radius: 7px;
+	margin-top: 250px;
+	border-radius: 15px;
 	font-size: 1rem;
-	padding: 12px 82px;
+	padding: 15px 82px;
 	color: #fff;
 	cursor: pointer;
 	border: 0;
