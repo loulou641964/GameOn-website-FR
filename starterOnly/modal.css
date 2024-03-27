@@ -667,7 +667,7 @@ footer {
 	padding-top: 200px;
 	display: none;
 	margin-top: 150px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+	
 }
 .btn-submit-confirm {
 	background: #fe142f;
