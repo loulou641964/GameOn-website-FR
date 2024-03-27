@@ -667,6 +667,7 @@ footer {
 	padding-top: 200px;
 	display: none;
 	margin-top: 150px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
 }
 .btn-submit-confirm {
 	background: #fe142f;
@@ -679,6 +680,7 @@ footer {
 	color: #fff;
 	cursor: pointer;
 	border: 0;
+	
 }
 input[aria-invalid='true'] {
 	border: 2px solid #f80925;
@@ -686,3 +688,6 @@ input[aria-invalid='true'] {
 input[aria-invalid='false'] {
 	border: 3px solid green;
 }
+.btn-submit-confirm:hover {
+	background-color: #3876ac; /* Change la couleur de fond au survol */
+  }
