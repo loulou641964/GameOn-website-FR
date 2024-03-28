@@ -71,7 +71,7 @@ function validate(form) {
 	emailValid ? hideErrorMessage('error-email', form["email"]) : getErrorMessage('error-email', "Veuillez entrer une adresse e-mail valide.", form["email"]);
 	// Validation de la date de naissance
 	let birthdateValid = checkCondition(form["birthdate"].value) && checkCondition(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(form["birthdate"].value));
-	birthdateValid ? hideErrorMessage('error-birthdate', form["birthdate"]) : getErrorMessage('error-birthdate', "Veuillez entrer une date de naissance valide au format jour-mois-année.", form["birthdate"]);
+	birthdateValid ? hideErrorMessage('error-birthdate', form["birthdate"]) : getErrorMessage('error-birthdate', "Veuillez entrer une date de naissance valide.", form["birthdate"]);
 	// Validation de la quantité de tournois
 	let qteTournamentValid = checkCondition(form["quantity"].value) && checkCondition(/^[0-9]+$/.test(form["quantity"].value));
 	qteTournamentValid ? hideErrorMessage('error-tournament', form["quantity"]) : getErrorMessage('error-tournament', "Veuillez entrer une valeur numérique pour la quantité de tournois.", form["quantity"]);
@@ -90,4 +90,14 @@ function validate(form) {
 // Ajoutez un gestionnaire d'événements au bouton "Fermer"
 document.getElementById('btnCloseConfirmation').addEventListener('click', function() {
 	closeModal(); // Appel de la fonction pour fermer le modal
+});
+const navLinks = document.querySelectorAll('.topnav a');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', function() {
+    // Supprimer la classe 'active' de tous les liens
+    navLinks.forEach(link => link.classList.remove('active'));
+    // Ajouter la classe 'active' à l'élément cliqué
+    this.classList.add('active');
+  });
 });
