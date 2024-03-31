@@ -1,6 +1,6 @@
 // Fonction pour modifier la navigation
 function editNav() {
-	var x = document.getElementById("myTopnav");
+	const x = document.getElementById("myTopnav");
 	if (x.className === "topnav") {
 		x.className += " responsive";
 	} else {
@@ -43,30 +43,30 @@ form.addEventListener('submit', (e) => {
 
 // Valider le formulaire après soumission
 function validate(form) {
-	let firstNameValid = checkCondition(form["first"].value) && form["first"].value.length >= 2;
+	const firstNameValid = checkCondition(form["first"].value) && form["first"].value.length >= 2;
 	firstNameValid ? hideErrorMessage('error-firstName', form["first"]) : getErrorMessage('error-firstName', "Veuillez entrer 2 caractères ou plus pour le champ du prénom.", form["first"]);
 
-	let lastNameValid = checkCondition(form["last"].value) && form["last"].value.length >= 2;
+	const lastNameValid = checkCondition(form["last"].value) && form["last"].value.length >= 2;
 	lastNameValid ? hideErrorMessage('error-lastName', form["last"]) : getErrorMessage('error-lastName', "Veuillez entrer 2 caractères ou plus pour le champ du nom.", form["last"]);
 
 	// Validation de l'email
-	let emailValid = checkCondition(form["email"].value) && /[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(form["email"].value);
+	const emailValid = checkCondition(form["email"].value) && /[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(form["email"].value);
 	emailValid ? hideErrorMessage('error-email', form["email"]) : getErrorMessage('error-email', "Veuillez entrer une adresse e-mail valide.", form["email"]);
 
 	// Validation de la date de naissance
-	let birthdateValid = checkCondition(form["birthdate"].value) && /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(form["birthdate"].value);
+	const birthdateValid = checkCondition(form["birthdate"].value) && /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(form["birthdate"].value);
 	birthdateValid ? hideErrorMessage('error-birthdate', form["birthdate"]) : getErrorMessage('error-birthdate', "Veuillez entrer une date de naissance valide.", form["birthdate"]);
 
 	// Validation de la quantité de tournois
-	let qteTournamentValid = checkCondition(form["quantity"].value) && /^[0-9]+$/.test(form["quantity"].value);
+	const qteTournamentValid = checkCondition(form["quantity"].value) && /^[0-9]+$/.test(form["quantity"].value);
 	qteTournamentValid ? hideErrorMessage('error-tournament', form["quantity"]) : getErrorMessage('error-tournament', "Veuillez entrer une valeur numérique pour la quantité de tournois.", form["quantity"]);
 
 	// Validation de la localisation
-	let locationValid = checkCondition(form.location.value);
+	const locationValid = checkCondition(form.location.value);
 	locationValid ? hideErrorMessage('error-location') : getErrorMessage('error-location', "Veuillez sélectionner une ville.");
 
 	// Validation des conditions générales
-	let termsValid = checkCondition(form.terms.checked);
+	const termsValid = checkCondition(form.terms.checked);
 	termsValid ? hideErrorMessage('error-terms') : getErrorMessage('error-terms', "Veuillez indiquer que vous acceptez les conditions générales.");
 
 	// Vérifier si toutes les conditions sont valides pour afficher un message de confirmation
@@ -87,15 +87,25 @@ function checkCondition(condition) {
 // Afficher un message d'erreur spécifique
 function getErrorMessage(elementId, message, inputAssociate) {
 	if (elementId && message) {
-		document.getElementById(elementId).style.display = "block";
-		document.getElementById(elementId).innerText = message;
+		const errorElement = document.getElementById(elementId);
+		if (errorElement) {
+			errorElement.style.display = "block";
+			errorElement.innerText = message;
+		}
 		if (inputAssociate) inputAssociate.setAttribute("aria-invalid", "true");
-	} else throw new Error('Paramètre manquant pour le message d\'erreur du gestionnaire');
+	} else {
+		throw new Error('Paramètre manquant pour le message d\'erreur du gestionnaire');
+	}
 }
 
 // Masquer un champ valide précédemment invalide
 function hideErrorMessage(elementId, inputAssociate) {
-	if (elementId) document.getElementById(elementId).style.display = "none";
+	if (elementId) {
+		const errorElement = document.getElementById(elementId);
+		if (errorElement) {
+			errorElement.style.display = "none";
+		}
+	}
 	if (inputAssociate) inputAssociate.setAttribute("aria-invalid", "false");
 }
 
