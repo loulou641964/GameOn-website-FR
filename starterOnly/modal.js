@@ -22,15 +22,16 @@ modalBtn.forEach((btn) => btn.addEventListener("click", () => {
 // Fonction pour fermer le modal
 function closeModal() {
 	modalbg.style.display = "none";
-	resetForm(form);
+	document.querySelector(".modal-body").style.display = "block";
+	document.querySelector(".formConfirmation").style.display = "none";
+	
 }
 
 // Réinitialiser le formulaire lors de la fermeture du modal
 function resetForm(form) {
 	form.reset();
 	document.querySelectorAll('.error').forEach(errorElement => errorElement.remove());
-	document.querySelector(".modal-body").style.display = "block";
-	document.querySelector(".formConfirmation").style.display = "none";
+	
 }
 
 // Événement de fermeture du modal
@@ -73,6 +74,7 @@ function validate(form) {
 	if (firstNameValid && lastNameValid && emailValid && birthdateValid && qteTournamentValid && locationValid && termsValid) {
 		document.querySelector(".modal-body").style.display = "none";
 		document.querySelector(".formConfirmation").style.display = "block";
+		resetForm(form);
 	}
 }
 
