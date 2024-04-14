@@ -119,3 +119,7 @@ navLinks.forEach(link => {
 		this.classList.add('active');
 	});
 });
+document.addEventListener("DOMContentLoaded", function() {
+    const element = document.querySelector(".icon");
+    element.addEventListener("click", editNav);
+});
